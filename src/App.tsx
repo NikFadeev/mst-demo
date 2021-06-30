@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { setupRootStore } from './mst/setup';
 import { Provider } from 'mobx-react';
+import { EmployerComponent } from './Components/Employer';
 
 interface Props {
 
@@ -31,9 +32,7 @@ class App extends React.Component<Props, State> {
 
     return (
       <Provider rootTree={rootTree}>
-        <div className="App">
-          <p>hi</p>
-        </div>
+        <EmployerComponent />
       </Provider>
     );
   }

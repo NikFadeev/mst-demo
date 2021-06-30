@@ -27,7 +27,7 @@ class App extends React.Component<Props, State> {
 
   render() {
     const { rootTree } = this.state;
-    if (rootTree) return null;
+    if (!rootTree) return null;
 
     return (
       <Provider rootTree={rootTree}>

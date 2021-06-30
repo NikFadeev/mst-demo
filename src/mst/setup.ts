@@ -1,3 +1,4 @@
+import { applySnapshot, getSnapshot, onSnapshot } from "mobx-state-tree"
 import { RootModel } from "."
 
 export const setupRootStore = () => {
@@ -8,6 +9,15 @@ export const setupRootStore = () => {
       location: "New York, NY",
       employees: []
     }
+  })
+
+  onSnapshot(rootTree, (snapshot) => console.log('spanshot: ', snapshot));
+
+  const currentRootTree = getSnapshot(rootTree);
+
+  applySnapshot(rootTree, {
+    ...currentRootTree,
+    employer: { ...currentRootTree.employer, location: 'Manhattan, NY' }
   })
 
   return { rootTree }

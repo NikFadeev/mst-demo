@@ -1,4 +1,5 @@
-import { Instance, types } from 'mobx-state-tree';
+import { applySnapshot, Instance, types } from 'mobx-state-tree';
+import { v4 } from 'uuid';
 
 const EmployeeModel = types.model("Employee", {
   id: types.identifier,
@@ -11,6 +12,12 @@ const EmployerModel = types.model("Employer", {
   name: types.string,
   location: types.string,
   employees: types.array(EmployeeModel)
+}).actions(self => {
+  function newEmployee(name: string, hours_worked: number) {
+    const id = v4();
+    applySnapshot(self, {...self, employees: [{ id, name, hours_worked }, ...self.employees]})
+  }
+  return { newEmployee };
 })
 
 const RootModel = types.model("Root", {
